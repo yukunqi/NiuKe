@@ -22,17 +22,11 @@ public class QuickSort {
         int j=low;
         for (int i=low;i<high;i++){
             if (A[i]<A[high]){
-                temp=A[j];
-                A[j]=A[i];
-                A[i]=temp;
+				swap(A,i,j);
                 j++;
             }
-            if (i==high-1){
-                temp=A[j];
-                A[j]=A[high];
-                A[high]=temp;
-            }
         }
+        swap(A,j,high);
         //此时的数组小于候选值的数在前面，大于的则在后面
         return j;//返回候选值的下标位置
     }
@@ -41,6 +35,10 @@ public class QuickSort {
         if (low==high){//如果相等则递归结束
             return;
         }
+        if(high-low<=10){//元素个数小于一定量时，使用效率更高的插入排序
+            InsertionSort(A,low,high);
+			return ;
+        }
         int partition = Partition(A, low, high);//以候选值为分界点递归调用函数进行快速排序
         if (partition>low){//候选值的前半部分递归
             quickSort_1(A,low,partition-1);
@@ -48,5 +46,24 @@ public class QuickSort {
         if (partition<high){//候选值的后半部分递归
             quickSort_1(A,partition+1,high);
         }
+    }
+    
+    public void swap(int []A,int a,int b){
+        int temp=A[a];
+		A[a]=A[b];
+		A[b]=temp;
+    }
+    public void InsertionSort(int []A,int start,int end){
+        int j=0;
+		int temp=0;
+		for(int i=start+1;i<=end;i++){
+			temp=A[i];
+			j=i;
+			while(j>start&&temp<A[j-1]){
+				A[j]=A[j-1];
+				j--;
+			}
+			A[j]=temp;
+		}
     }
 }

@@ -9,7 +9,7 @@ public class MergeSort {
        if(right>left){
             
             
-           if(right-left<10){
+           if(right-left<10){//元素个数小于一定数量时采用插入排序 可以自己指定
                insertSort(A,left,right);
            }
             
@@ -18,7 +18,7 @@ public class MergeSort {
            mergePass(A,middle+1,right);
             
             
-           if(A[middle]<=A[middle+1]){
+           if(A[middle]<=A[middle+1]){//如果在中间数的前后两个数已经有序 则整体一定有序 不需要再次进行调整
                return;
            }
             
@@ -38,23 +38,23 @@ public class MergeSort {
         }
     }
     public void merge(int []A,int low,int high,int mid){
-        int []temp=new int [high-low+1];
+        int []temp=new int [high-low+1];//建立一个临时空间存放排序好的元素
         int k=0;
         int i=low,j=mid+1;
-        while(i<=mid&&j<=high){
+        while(i<=mid&&j<=high){//将小的元素优先放到数组中
             if(A[i]>A[j]){
                 temp[k++]=A[j++];
             }else{
                 temp[k++]=A[i++];
             }
         }
-        while(i<=mid){
+        while(i<=mid){//将剩余的元素插入
             temp[k++]=A[i++];
         }
-        while(j<=high){
+        while(j<=high){//同上
             temp[k++]=A[j++];
         }
-        for( k=0,i=low;i<=high;i++,k++){
+        for( k=0,i=low;i<=high;i++,k++){//排序好后重新放回原数组中去
             A[i]=temp[k];
         }
     }

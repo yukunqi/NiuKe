@@ -5,9 +5,9 @@ public class BubbleSort {
        int i=n-1;
          
         while(i>0){
-            int pos=0;
+            int pos=0;//记录每次交换的最后一个位置
              
-            for(int j=0;j<i;j++){
+            for(int j=0;j<i;j++){//只需要检查i之前的值
                 if(A[j]>A[j+1]){
                     int temp=A[j];
                     A[j]=A[j+1];
@@ -16,7 +16,7 @@ public class BubbleSort {
                 }
             }
              
-            i=pos;
+            i=pos;//i更新成pos
         }
          
         return A;
